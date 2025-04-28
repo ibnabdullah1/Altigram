@@ -3,7 +3,6 @@ import { ActivityIndicator } from "react-native";
 import { StreamChat } from "stream-chat";
 import { Chat, OverlayProvider } from "stream-chat-expo";
 import { supabase } from "../lib/supabase";
-import { tokenProvider } from "../utils/tokenProvider";
 import { useAuth } from "./AuthProvider";
 
 const client = StreamChat.getInstance(process.env.EXPO_PUBLIC_STREAM_API_KEY);
@@ -16,9 +15,8 @@ export default function ChatProvider({ children }: PropsWithChildren) {
     if (!profile) {
       return;
     }
-    tokenProvider().then(console.log);
     const connect = async () => {
-      await client.connectUser(
+      const res = await client.connectUser(
         {
           id: profile.id,
           name: profile.full_name,
@@ -26,9 +24,15 @@ export default function ChatProvider({ children }: PropsWithChildren) {
             .from("avatars")
             .getPublicUrl(profile.avatar_url).data.publicUrl,
         },
-        tokenProvider
+        client.devToken(profile.id)
       );
       setIsReady(true);
+      console.log(res, profile.id);
+
+      // const channel = client.channel("messaging", "the_park", {
+      //   name: "The Park",
+      // });
+      // await channel.watch();
     };
 
     connect();

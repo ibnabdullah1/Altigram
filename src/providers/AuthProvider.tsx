@@ -1,4 +1,5 @@
 import { Session, User } from "@supabase/supabase-js";
+import { usePathname } from "expo-router";
 import {
   PropsWithChildren,
   createContext,
@@ -35,6 +36,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   useEffect(() => {
+    // supabase.auth.signOut();
     if (!session?.user) {
       setProfile(null);
       return;
@@ -50,6 +52,9 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     };
     fetchProfile();
   }, [session?.user]);
+  const pathname = usePathname();
+
+  console.log("Current Path:", pathname);
 
   return (
     <AuthContext.Provider value={{ session, user: session?.user, profile }}>

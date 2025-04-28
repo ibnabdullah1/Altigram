@@ -6,12 +6,12 @@ const HomeScreen = () => {
   const router = useRouter();
 
   const handleStartChat = () => {
-    router.push("/(home)/(tabs)"); // Chat screen এ যাবে (তুমি আলাদা Chat page বানাবে)
+    router.push("/(home)/(tabs)");
   };
-
+  console.log("Hello from HomeScreen");
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Chatify! 💬</Text>
+      <Text style={styles.title}>Welcome to Altigram! 💬</Text>
       <Text style={styles.subtitle}>
         Connect and chat with your friends instantly.
       </Text>
