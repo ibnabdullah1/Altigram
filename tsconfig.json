@@ -1,15 +1,19 @@
+// {
+//   "extends": "expo/tsconfig.base",
+//   "compilerOptions": {
+//     "strict": true,
+//     "paths": {
+//       "@/*": ["src/*"]
+//     }
+//   },
+//   "include": [
+//     "src/**/*.ts", // Adjusted to correctly include all TypeScript files in the 'src' folder
+//     "src/**/*.tsx", // Adjusted to correctly include all TSX files in the 'src' folder
+//     ".expo/types/**/*.ts",
+//     "expo-env.d.ts"
+//   ]
+// }
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "include": [
-    "src/**/*.ts", // Adjusted to correctly include all TypeScript files in the 'src' folder
-    "src/**/*.tsx", // Adjusted to correctly include all TSX files in the 'src' folder
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "compilerOptions": {},
+  "extends": "expo/tsconfig.base"
 }
