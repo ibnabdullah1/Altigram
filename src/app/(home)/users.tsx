@@ -19,7 +19,7 @@ export default function UsersScreen() {
     };
     fetchUsers();
   }, []);
-
+  console.log(users);
   return (
     <FlatList
       data={users}
