@@ -1,24 +1,23 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-export default function TabNavigator() {
+
+export default function TabsNavigator() {
   return (
     <Tabs>
       <Tabs.Screen
         name="index"
         options={{
           title: "Chats",
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" size={size} color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome5 name="home" size={size} color={color} />
           ),
         }}
       />
-
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ size, color }) => (
             <FontAwesome5 name="user-alt" size={size} color={color} />
           ),
         }}
