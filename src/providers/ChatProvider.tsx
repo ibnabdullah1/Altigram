@@ -16,7 +16,7 @@ export default function ChatProvider({ children }: PropsWithChildren) {
       return;
     }
     const connect = async () => {
-      const res = await client.connectUser(
+      await client.connectUser(
         {
           id: profile.id,
           name: profile.full_name,
@@ -27,8 +27,6 @@ export default function ChatProvider({ children }: PropsWithChildren) {
         client.devToken(profile.id)
       );
       setIsReady(true);
-      console.log(res, profile.id);
-
       // const channel = client.channel("messaging", "the_park", {
       //   name: "The Park",
       // });
