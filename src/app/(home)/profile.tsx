@@ -157,7 +157,7 @@ export default function ProfileScreen() {
 
         <View style={[styles.verticallySpaced, styles.mt20]}>
           <Button
-            title={loading ? "Loading ..." : "Update"}
+            title={loading ? "Loading ..." : "Update Profile"}
             onPress={() =>
               updateProfile({
                 username,
