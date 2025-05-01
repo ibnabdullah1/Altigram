@@ -1,6 +1,14 @@
+import { SimpleLineIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
-import { Alert, Button, Image, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import { supabase } from "../lib/supabase";
 
 interface Props {
@@ -42,8 +50,6 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
 
   async function uploadAvatar() {
     try {
-      setUploading(true);
-
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images, // Restrict to only images
         allowsMultipleSelection: false, // Can only select one image
@@ -51,6 +57,7 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
         quality: 1,
         exif: false, // We don't want nor need that data.
       });
+      setUploading(true);
 
       if (result.canceled || !result.assets || result.assets.length === 0) {
         console.log("User cancelled image picker.");
@@ -93,42 +100,47 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
   }
 
   return (
-    <View>
-      {avatarUrl ? (
-        <Image
-          source={{ uri: avatarUrl }}
-          accessibilityLabel="Avatar"
-          style={[avatarSize, styles.avatar, styles.image]}
-        />
-      ) : (
-        <View style={[avatarSize, styles.avatar, styles.noImage]} />
-      )}
-      <View>
-        <Button
-          title={uploading ? "Uploading ..." : "Upload"}
-          onPress={uploadAvatar}
-          disabled={uploading}
-        />
-      </View>
+    <View style={styles.container}>
+      <Image
+        source={{
+          uri:
+            avatarUrl ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJeUQrlpjKZTvKtg57UJtbidx6qJAjxJUc2A&s",
+        }}
+        accessibilityLabel="Avatar"
+        style={[avatarSize, styles.image]}
+      />
+      <Pressable style={styles.button} onPress={uploadAvatar}>
+        {uploading ? (
+          <ActivityIndicator size="small" color="#fff" />
+        ) : (
+          <SimpleLineIcons name="camera" size={18} color="#fff" />
+        )}
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  avatar: {
-    borderRadius: 5,
-    overflow: "hidden",
-    maxWidth: "100%",
+  container: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     objectFit: "cover",
     paddingTop: 0,
+    borderRadius: 100,
+    height: 130,
+    width: 130,
+    overflow: "hidden",
   },
-  noImage: {
-    backgroundColor: "#333",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "rgb(200, 200, 200)",
-    borderRadius: 5,
+  button: {
+    position: "absolute",
+    bottom: 10,
+    right: -0,
+    backgroundColor: "#01534a",
+    borderRadius: 100,
+    padding: 10,
   },
 });

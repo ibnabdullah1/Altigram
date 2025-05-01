@@ -4,32 +4,23 @@
     "slug": "altigram",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/round-logo.png",
     "scheme": "myaltigram",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bitcode": false
+      "bundleIdentifier": "com.ibnabdullah01.altigram",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/favicon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.BLUETOOTH",
-        "android.permission.BLUETOOTH_CONNECT",
-        "android.permission.BLUETOOTH_ADMIN",
-        "android.permission.ACCESS_NETWORK_STATE",
-        "android.permission.CAMERA",
-        "android.permission.INTERNET",
-        "android.permission.MODIFY_AUDIO_SETTINGS",
-        "android.permission.RECORD_AUDIO",
-        "android.permission.SYSTEM_ALERT_WINDOW",
-        "android.permission.WAKE_LOCK"
-      ],
-      "package": "com.anonymous.altigram"
+      "package": "com.ibnabdullah01.altigram"
     },
     "web": {
       "bundler": "metro",
@@ -47,27 +38,7 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "minSdkVersion": 24,
-            "compileSdkVersion": 34,
-            "targetSdkVersion": 33,
-            "extraMavenRepos": [
-              "../../node_modules/@notifee/react-native/android/libs"
-            ]
-          }
-        }
-      ],
-      "@stream-io/video-react-native-sdk",
-      [
-        "@config-plugins/react-native-webrtc",
-        {
-          "cameraPermission": "$(PRODUCT_NAME) requires camera access in order to capture and transmit video",
-          "microphonePermission": "$(PRODUCT_NAME) requires microphone access in order to capture and transmit audio"
-        }
-      ]
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
@@ -77,8 +48,14 @@
         "origin": false
       },
       "eas": {
-        "projectId": "235241f3-dded-42b0-abb9-1e89c875625f"
+        "projectId": "6971adbf-0f80-4f71-90a4-1353f72f829e"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6971adbf-0f80-4f71-90a4-1353f72f829e"
     }
   }
 }

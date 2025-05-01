@@ -3,6 +3,7 @@ import { ActivityIndicator } from "react-native";
 import { StreamChat } from "stream-chat";
 import { Chat, OverlayProvider } from "stream-chat-expo";
 import { supabase } from "../lib/supabase";
+import { tokenProvider } from "../utils/tokenProvider";
 import { useAuth } from "./AuthProvider";
 
 const client = StreamChat.getInstance(process.env.EXPO_PUBLIC_STREAM_API_KEY);
@@ -15,7 +16,9 @@ export default function ChatProvider({ children }: PropsWithChildren) {
     if (!profile) {
       return;
     }
+
     const connect = async () => {
+      // supabase.auth.signOut();
       await client.connectUser(
         {
           id: profile.id,
@@ -24,13 +27,9 @@ export default function ChatProvider({ children }: PropsWithChildren) {
             .from("avatars")
             .getPublicUrl(profile.avatar_url).data.publicUrl,
         },
-        client.devToken(profile.id)
+        tokenProvider
       );
       setIsReady(true);
-      // const channel = client.channel("messaging", "the_park", {
-      //   name: "The Park",
-      // });
-      // await channel.watch();
     };
 
     connect();
@@ -42,7 +41,6 @@ export default function ChatProvider({ children }: PropsWithChildren) {
       setIsReady(false);
     };
   }, [profile?.id]);
-
   if (!isReady) {
     return <ActivityIndicator />;
   }

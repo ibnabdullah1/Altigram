@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
-import UserListItem from "../../components/UserListItem";
-import { supabase } from "../../lib/supabase";
-import { useAuth } from "../../providers/AuthProvider";
+import UserListItem from "../../../components/UserListItem";
+import { supabase } from "../../../lib/supabase";
+import { useAuth } from "../../../providers/AuthProvider";
 
 export default function UsersScreen() {
   const [users, setUsers] = useState([]);
@@ -19,11 +19,13 @@ export default function UsersScreen() {
     };
     fetchUsers();
   }, []);
-  console.log(users);
   return (
     <FlatList
       data={users}
-      contentContainerStyle={{ gap: 5 }}
+      contentContainerStyle={{
+        backgroundColor: "#F2F2F2",
+        gap: 1,
+      }}
       renderItem={({ item }) => <UserListItem user={item} />}
     />
   );
